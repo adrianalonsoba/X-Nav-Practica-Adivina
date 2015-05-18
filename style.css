@@ -1,7 +1,7 @@
-body {
+.begin {
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
 }
-html, body, #map {
-    height: 100%;
+#map {
+    height: 720px;
 }
