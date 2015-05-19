@@ -1,0 +1,61 @@
+{
+	"type": "FeatureCollection",
+	"features": 
+	[
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [40.4167754, -3.7037901999999576]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Madrid"
+			},
+			"id": 1
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [ 48.856614,2.3522219000000177]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Berlin"
+			},
+			"id": 2
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [48.856614,2.3522219000000177]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Paris"
+			},
+			"id": 3
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [38.9071923,-77.03687070000001]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Washington"
+			},
+			"id": 4
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [ 51.5073509, -0.12775829999998223]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "London"
+			},
+			"id": 5
+        }
+	]
+}
