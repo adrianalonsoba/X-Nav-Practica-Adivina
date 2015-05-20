@@ -4,6 +4,10 @@ jQuery(document).ready(function() {
 
 	var timer;
 
+	var score=0;
+
+	var picsdisplayed=1;
+
 	var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
 
@@ -31,9 +35,6 @@ jQuery(document).ready(function() {
 			$('#myCarousel').show();
 			$('#map').show();
 			startGame();
-			//drawMap();
-
-
 		}
 	});
 
@@ -47,16 +48,17 @@ jQuery(document).ready(function() {
 		.done(function(data){
 	        data = data.items.splice(0,20);
 	        for(i=0; i<20 ; i++){
-	            var html="";
+	            var html;
 	            if(i===0){
 	                html='<div class="item active">'
-	                    html+='<img id="car0" src="'+data[i].media.m+'"width="100%">'
+	                    html+='<img id="carousel0" src="'+data[i].media.m+'"width="100%">'
 	                html+='</div>'
 	            }else{
 	                html='<div class="item">'
-	                    html+='<img id="car'+i+'" src="'+data[i].media.m+'"width="100%">'
+	                    html+='<img id="carousel'+i+'" src="'+data[i].media.m+'"width="100%">'
 	                html+='</div>'
 	            }
+				$("#myCarousel").data("bs.carousel").options.interval = 3000/difficulty;           
 	            $(".carousel-inner").append(html);
 	        } 
 	    });
@@ -71,11 +73,17 @@ jQuery(document).ready(function() {
 	        console.log(place.id);
 	        console.log(placetag);
 	        console.log(placecoords[0]);
+
 	        showPics(placetag,placecoords);
 	    });
-	    drawMap();
-
+	    drawMap(); 
 	}
+
+	//actualiza el numero de fotos mostradas
+	$("#myCarousel").on("slid.bs.carousel",function(){
+        picsdisplayed++;
+        //alert(picsdisplayed);
+	});
 
 
 	function drawMap(){
