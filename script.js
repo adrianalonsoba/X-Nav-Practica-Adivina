@@ -2,9 +2,11 @@ jQuery(document).ready(function() {
 
 	var difficulty=0;
 
-	var timer;
-
 	var score=0;
+
+	var placecoords;
+
+	var placetag;
 
 	var picsdisplayed=1;
 
@@ -68,8 +70,8 @@ jQuery(document).ready(function() {
 	    $.getJSON("juegos/Capitales.json", function(data) {
 	        console.log(data.type);
 	        var place = data.features[Math.floor(Math.random()*data.features.length)];
-	        var placecoords=place.geometry.coordinates;
-	        var placetag=place.properties.Name;
+	        placecoords=place.geometry.coordinates;
+	        placetag=place.properties.Name;
 	        console.log(place.id);
 	        console.log(placetag);
 	        console.log(placecoords[0]);
@@ -85,6 +87,18 @@ jQuery(document).ready(function() {
         //alert(picsdisplayed);
 	});
 
+	function Dist(lat1, lon1, lat2, lon2){
+	  	rad = function(x) {return x*Math.PI/180;}
+		  var R     = 6378.137;                          //Radio de la tierra en km
+		  var dLat  = rad( lat2 - lat1 );
+		  var dLong = rad( lon2 - lon1 );
+
+		  var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong/2) * Math.sin(dLong/2);
+		  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		  var d = R * c;
+
+		  return d.toFixed(3);                      //Retorna tres decimales
+	}
 
 	function drawMap(){
 		var map = L.map('map').setView([40.2838, -3.8215], 13);
@@ -93,36 +107,16 @@ jQuery(document).ready(function() {
 		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
 
-
-		var marker = L.marker([40.2838, -3.8215]).addTo(map);
-
-		marker.bindPopup("<b>Esto es el aulario III de la URJC</b><br>I am a popup.").openPopup();
-
 		function onMapClick(e) {
 		    var marker = L.marker(e.latlng).addTo(map);
 		    marker.bindPopup("<b>Coordenadas</b><br>"+e.latlng).openPopup();
+		    var dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
+		    alert("clic:"+e.latlng+" \norigen:"+L.latLng(placecoords[0], placecoords[1])+"\ndistancia:"+dist+'km'+
+		    	        '\nsitio:'+placetag);
 		}
-
+		
 		map.on('click', onMapClick);
 
-		map.locate({setView: true, maxZoom: 16});
-
-		function onLocationFound(e) {
-		    var radius = e.accuracy / 2;
-
-		    L.marker(e.latlng).addTo(map)
-		        .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-		    L.circle(e.latlng, radius).addTo(map);
-		}
-
-		map.on('locationfound', onLocationFound);
-
-		function onLocationError(e) {
-		    alert(e.message);
-		}
-
-		map.on('locationerror', onLocationError);
 		}
 
 });
