@@ -87,19 +87,6 @@ jQuery(document).ready(function() {
         //alert(picsdisplayed);
 	});
 
-	function Dist(lat1, lon1, lat2, lon2){
-	  	rad = function(x) {return x*Math.PI/180;}
-		  var R     = 6378.137;                          //Radio de la tierra en km
-		  var dLat  = rad( lat2 - lat1 );
-		  var dLong = rad( lon2 - lon1 );
-
-		  var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong/2) * Math.sin(dLong/2);
-		  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-		  var d = R * c;
-
-		  return d.toFixed(3);                      //Retorna tres decimales
-	}
-
 	function drawMap(){
 		var map = L.map('map').setView([40.2838, -3.8215], 13);
 		
@@ -111,8 +98,9 @@ jQuery(document).ready(function() {
 		    var marker = L.marker(e.latlng).addTo(map);
 		    marker.bindPopup("<b>Coordenadas</b><br>"+e.latlng).openPopup();
 		    var dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
-		    alert("clic:"+e.latlng+" \norigen:"+L.latLng(placecoords[0], placecoords[1])+"\ndistancia:"+dist+'km'+
-		    	        '\nsitio:'+placetag);
+		    score=dist*picsdisplayed;
+		    alert("clic:"+e.latlng+" \norigen:"+L.latLng(placecoords[0], placecoords[1])+"\ndistancia:"+dist+'km'+'\nsitio:'+placetag+'\npuntuacion:'+score);
+		    
 		}
 		
 		map.on('click', onMapClick);
