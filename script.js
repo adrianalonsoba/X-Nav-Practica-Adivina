@@ -15,7 +15,6 @@ jQuery(document).ready(function() {
 	var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
 	$('#gamezone').hide();
-	$('#gameover').hide();
 
 	$('#easy').click(function(){
 		difficulty=1;
@@ -48,6 +47,7 @@ jQuery(document).ready(function() {
 		$('#game').html('Monumentos');
 	});
 
+	//OJO CAMBIAR 
 	$('#abort').click(function(){
 		window.location.reload();
 	});
@@ -56,7 +56,8 @@ jQuery(document).ready(function() {
 		if(difficulty===0||game===''){
 			alert('Elige una dificultad y juego');
 		}else{
-			$("#myCarousel").data("bs.carousel").options.interval = 6000/difficulty;           
+			$(".carousel-inner").empty();
+			$("#myCarousel").data("bs.carousel").options.interval = 6000/difficulty;          
 			$('#begin').hide();
 			$('#gamezone').show();
 			startGame();
@@ -70,8 +71,8 @@ jQuery(document).ready(function() {
 			format:"json"
 		})
 		.done(function(data){
-	        data = data.items.splice(0,20);
-	        for(i=0; i<20 ; i++){
+	        data = data.items.splice(0,10);
+	        for(i=0; i<10 ; i++){
 	            var html;
 	            if(i===0){
 	                html='<div class="item active">'
@@ -93,13 +94,15 @@ jQuery(document).ready(function() {
 	        placecoords=place.geometry.coordinates;
 	        placetag=place.properties.Name;
 	        showPics(placetag,placecoords);
+	        drawMap();
 	    });
-	    drawMap(); 
+	     
 	}
 
 	//actualiza el numero de fotos mostradas
 	$("#myCarousel").on("slid.bs.carousel",function(){
         picsdisplayed++;
+
         //alert(picsdisplayed);
 	});
 
@@ -110,39 +113,42 @@ jQuery(document).ready(function() {
 		    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 		}).addTo(map);
 
-		function onMapClick(e) {
-			//$("#myCarousel").data("bs.carousel").options.interval = 0;           
+		function onMapClick(e) {         
 		    var dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
 		    score=dist*picsdisplayed;
 		    //alert("clic:"+e.latlng+" \norigen:"+L.latLng(placecoords[0], placecoords[1])+"\ndistancia:"+dist+'km'+'\nsitio:'+placetag+'\npuntuacion:'+score);
 		    showScore(dist);
+		}
 
+		function goTo(state){
+			alert('1111111');
 		}
 
 		function saveHistory(){
 			var stateObj={
 				name:game,
 				date:new Date(),
-				score:score
+				score:score,
+				difficulty:difficulty
 			}
-			history.pushState(stateObj,'Adivina',location.href+game);
+			history.pushState(stateObj,'Adivina',location.href+game+difficulty);
+			var html= '<a id='+stateObj.name+' href="javascript:goTo('+game+')" class="list-group-item his">'+game+'Puntos: '+score+' Fecha:'+stateObj.date+'</a>';
+			$('#history').append(html);
+
 			
 		}
 
 		function showScore(dist){
-			$(".carousel-inner").html('');
+			$(".carousel-inner").empty();
+			$("#myCarousel").data("bs.carousel").options.interval = 5000;           
+
 			$('#gamezone').hide();
 			$('#gameover').html('<h1>'+'LUGAR: '+placetag+'<br>'+
 				                'DISTANCIA: '+dist.toFixed(3)+' Km'+'<br>'+
-				                'PUNTUACIÓN: '+score.toFixed(3)+'</h1>'+'<br>'+
-				                '<p><a  id="goinit" class="btn btn-lg btn-success" href="#" role="button">Volver a empezar</a></p>');
-			$('#gameover').show();
+				                'PUNTUACIÓN: '+score.toFixed(3)+'</h1>');
 			saveHistory();
-			$('#goinit').click(function(){
-				 window.location.reload();  
-			});
+			$('#begin').show();
 		}
-
 		map.on('click', onMapClick);
 
 	}
