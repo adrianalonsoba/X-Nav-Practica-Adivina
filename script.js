@@ -14,8 +14,7 @@ jQuery(document).ready(function() {
 
 	var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
-	$('#myCarousel').hide();
-	$('#map').hide();
+	$('#gamezone').hide();
 	$('#gameover').hide();
 
 	$('#easy').click(function(){
@@ -49,14 +48,17 @@ jQuery(document).ready(function() {
 		$('#game').html('Monumentos');
 	});
 
+	$('#abort').click(function(){
+		window.location.reload();
+	});
+
 	$('#start').click(function(){
 		if(difficulty===0||game===''){
 			alert('Elige una dificultad y juego');
 		}else{
 			$("#myCarousel").data("bs.carousel").options.interval = 6000/difficulty;           
 			$('#begin').hide();
-			$('#myCarousel').show();
-			$('#map').show();
+			$('#gamezone').show();
 			startGame();
 		}
 	});
@@ -129,8 +131,7 @@ jQuery(document).ready(function() {
 
 		function showScore(dist){
 			$(".carousel-inner").html('');
-			$('#myCarousel').hide();
-			$('#map').hide();
+			$('#gamezone').hide();
 			$('#gameover').html('<h1>'+'LUGAR: '+placetag+'<br>'+
 				                'DISTANCIA: '+dist.toFixed(3)+' Km'+'<br>'+
 				                'PUNTUACIÓN: '+score.toFixed(3)+'</h1>'+'<br>'+
