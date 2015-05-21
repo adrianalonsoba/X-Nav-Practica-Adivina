@@ -62,7 +62,6 @@ jQuery(document).ready(function() {
 	});
 
 	function showPics(tag,coords){
-		console.log('TAG='+tag);
 		$.getJSON(flickerAPI,{
 			tags:tag,
 			tagmode:"any",
@@ -88,14 +87,9 @@ jQuery(document).ready(function() {
 
 	function startGame(){
 	    $.getJSON("juegos/"+game, function(data) {
-	        console.log(data.type);
 	        var place = data.features[Math.floor(Math.random()*data.features.length)];
 	        placecoords=place.geometry.coordinates;
 	        placetag=place.properties.Name;
-	        console.log(place.id);
-	        console.log(placetag);
-	        console.log(placecoords[0]);
-
 	        showPics(placetag,placecoords);
 	    });
 	    drawMap(); 
