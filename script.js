@@ -118,7 +118,7 @@ jQuery(document).ready(function() {
 
 	function showScore(dist){
 		$("#myCarousel").data("bs.carousel").options.interval = 0; 
-		$(".carousel-inner").html('');          
+		//$(".carousel-inner").html('');          
 		$('#gamezone').hide();
 		$('#gameover').html('<h1>'+'LUGAR: '+placetag+'<br>'+
 			                'DISTANCIA: '+dist.toFixed(3)+' Km'+'<br>'+
