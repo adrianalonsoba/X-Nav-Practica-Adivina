@@ -1,0 +1,61 @@
+{
+	"type": "FeatureCollection",
+	"features": 
+	[
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [41.89021, 12.492230999999947]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Coliseo de Roma"
+			},
+			"id": 1
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [40.689249,-74.04449999999997]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Estatua de la libertad"
+			},
+			"id": 2
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [27.175015,78.04215499999998]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Taj Mahal"
+			},
+			"id": 3
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [37.819929,-122.47825499999999]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Golden Gate Bridge"
+			},
+			"id": 4
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [ 40.453054, -3.688344000000029]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Santiago Bernabeu"
+			},
+			"id": 5
+        }
+	]
+}

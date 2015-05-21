@@ -8,6 +8,8 @@ jQuery(document).ready(function() {
 
 	var placetag;
 
+	var game='';
+
 	var picsdisplayed=1;
 
 	var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
@@ -18,20 +20,38 @@ jQuery(document).ready(function() {
 
 	$('#easy').click(function(){
 		difficulty=1;
+		$('#difficulty').html('fácil');
+
 	});
 
 	$('#normal').click(function(){
 		difficulty=3;
+		$('#difficulty').html('normal');
 	});
 
 	$('#hard').click(function(){
 		difficulty=6;
+		$('#difficulty').html('difícil');
 	});
 
+	$('#capitals').click(function(){
+		game='Capitales.json';
+		$('#game').html('Capitales');
+	});
+
+	$('#countries').click(function(){
+		game='Paises.json';
+		$('#game').html('Paises');
+	});
+
+	$('#monuments').click(function(){
+		game='Monumentos.json';
+		$('#game').html('Monumentos');
+	});
 
 	$('#start').click(function(){
-		if(difficulty===0){
-			alert('Elige una dificultad');
+		if(difficulty===0||game===''){
+			alert('Elige una dificultad y juego');
 		}else{
 			$("#myCarousel").data("bs.carousel").options.interval = 6000/difficulty;           
 			$('#begin').hide();
@@ -67,7 +87,7 @@ jQuery(document).ready(function() {
 	}
 
 	function startGame(){
-	    $.getJSON("juegos/Capitales.json", function(data) {
+	    $.getJSON("juegos/"+game, function(data) {
 	        console.log(data.type);
 	        var place = data.features[Math.floor(Math.random()*data.features.length)];
 	        placecoords=place.geometry.coordinates;
@@ -104,13 +124,19 @@ jQuery(document).ready(function() {
 		}
 
 		function saveHistory(){
-
+			var stateObj={
+				name:game,
+				date:new Date(),
+				score:score
+			}
+			history.pushState(stateObj,'Adivina',location.href+game);
+			
 		}
 
 		function showScore(dist){
+			$(".carousel-inner").html('');
 			$('#myCarousel').hide();
 			$('#map').hide();
-			
 			$('#gameover').html('<h1>'+'LUGAR: '+placetag+'<br>'+
 				                'DISTANCIA: '+dist.toFixed(3)+' Km'+'<br>'+
 				                'PUNTUACIÓN: '+score.toFixed(3)+'</h1>'+'<br>'+

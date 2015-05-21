@@ -1,0 +1,61 @@
+{
+	"type": "FeatureCollection",
+	"features": 
+	[
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [56.130366, -106.34677099999999]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Canada"
+			},
+			"id": 1
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [20.593684,78.96288000000004]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "India"
+			},
+			"id": 2
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [35.86166,104.19539699999996]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "China"
+			},
+			"id": 3
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [-14.235004,-51.92527999999999]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Brasil"
+			},
+			"id": 4
+        },
+        {
+			"geometry": {
+	                    "type": "Point",
+	                    "coordinates": [ -25.274398, 133.77513599999997]
+			},
+			"type": "Feature",
+			"properties": {
+	                    "Name": "Australia"
+			},
+			"id": 5
+        }
+	]
+}

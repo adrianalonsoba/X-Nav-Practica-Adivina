@@ -15,14 +15,29 @@
       <div class="jumbotron">
         <h1>Juego de ADIVINA</h1>
         <p class="lead">Adivina a qué lugares misteriosos corresponen las fotos haciendo click en el mapa.
-        Elige la dificultad y pulsa empezar!</p>
+        Elige  juego y dificultad y pulsa empezar!</p>
+        <p>
+          <button id="capitals" type="button" class="btn btn-lg btn-info">Capitales</button>
+          <button id="countries" type="button" class="btn btn-lg btn-warning">Paises</button>
+          <button id="monuments" type="button" class="btn btn-lg btn-danger">Monumentos</button>
+        </p>
         <p>
           <button id="easy" type="button" class="btn btn-lg btn-info">Fácil</button>
           <button id="normal" type="button" class="btn btn-lg btn-warning">Normal</button>
           <button id="hard" type="button" class="btn btn-lg btn-danger">Difícil</button>
-          <p><a  id="start" class="btn btn-lg btn-success" href="#" role="button">Empezar!</a></p>
+          <p>
+            <div id="parameters">
+              Juego:<a id="game">-</a>
+              Dificultad:<a id="difficulty">-</a>
+            </div>
+            <a  id="start" class="btn btn-lg btn-success" href="#" role="button">Empezar!</a>
+          </p>
         </p>
       </div>
+       <!-- history -->
+      <div id="history"></div>
+       <!-- /history -->
+
     </div>
 
       <!-- CARROUSEL -->
@@ -35,6 +50,7 @@
     <!-- MAP -->
      <div id="map"></div>
     <!-- /.MAP -->
+
 
     <div id="gameover"></div>
   
