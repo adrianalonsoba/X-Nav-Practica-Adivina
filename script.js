@@ -12,17 +12,6 @@ jQuery(document).ready(function() {
 
 	var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
-
-
-	$('#goinit').click(function(){
-		picsdisplayed=1;
-		difficulty=0;
-		score=0;
-		$('#begin').show();
-		alert('!!!!!!!!!');
-	});
-
-
 	$('#myCarousel').hide();
 	$('#map').hide();
 	$('#gameover').hide();
@@ -106,13 +95,15 @@ jQuery(document).ready(function() {
 		}).addTo(map);
 
 		function onMapClick(e) {
-			$("#myCarousel").data("bs.carousel").options.interval = 0;           
-		    var marker = L.marker(e.latlng).addTo(map);
-		    marker.bindPopup("<b>Coordenadas</b><br>"+e.latlng).openPopup();
+			//$("#myCarousel").data("bs.carousel").options.interval = 0;           
 		    var dist=e.latlng.distanceTo(L.latLng(placecoords[0], placecoords[1]))/1000;
 		    score=dist*picsdisplayed;
 		    //alert("clic:"+e.latlng+" \norigen:"+L.latLng(placecoords[0], placecoords[1])+"\ndistancia:"+dist+'km'+'\nsitio:'+placetag+'\npuntuacion:'+score);
 		    showScore(dist);
+
+		}
+
+		function saveHistory(){
 
 		}
 
@@ -125,13 +116,9 @@ jQuery(document).ready(function() {
 				                'PUNTUACIÓN: '+score.toFixed(3)+'</h1>'+'<br>'+
 				                '<p><a  id="goinit" class="btn btn-lg btn-success" href="#" role="button">Volver a empezar</a></p>');
 			$('#gameover').show();
+			saveHistory();
 			$('#goinit').click(function(){
-				picsdisplayed=1;
-				difficulty=0;
-				score=0;
-				$('#gameover').html('');
-				$(".carousel-inner").html('');
-				$('#begin').show();
+				 window.location.reload();  
 			});
 		}
 
