@@ -1,7 +1,4 @@
 
-jQuery(document).ready(function() {
-
-
 	var difficulty=0;
 
 	var score=0;
@@ -11,6 +8,8 @@ jQuery(document).ready(function() {
 	var placetag;
 
 	var game='';
+
+	var gameid;
 
 	var picsdisplayed=1;
 
@@ -36,16 +35,19 @@ jQuery(document).ready(function() {
 
 	$('#capitals').click(function(){
 		game='Capitales.json';
+		gameid=1;
 		$('#game').html('Capitales');
 	});
 
 	$('#countries').click(function(){
 		game='Paises.json';
+		gameid=2;
 		$('#game').html('Paises');
 	});
 
 	$('#monuments').click(function(){
 		game='Monumentos.json';
+		gameid=3;
 		$('#game').html('Monumentos');
 	});
 
@@ -136,20 +138,30 @@ jQuery(document).ready(function() {
 			difficulty:difficulty
 		}
 		history.pushState(stateObj,'Adivina',location.href+game+difficulty);
-		var html= '<a href="javascript:goTo('+game+','+difficulty+')">'+game+'Puntos: '+score+' Fecha:'+stateObj.date+'</a>'+'<br>';
+		var html= '<a href="javascript:goTo('+gameid+','+difficulty+')">'+game+'Puntos: '+score+' Fecha:'+stateObj.date+'</a>'+'<br>';
 		$('#history').append(html);	
 	}
-
-	function goTo(game,difficulty){
-		game=game;
-		difficulty=difficulty;
-		startGame();
-	}
-
 	//actualiza el numero de fotos mostradas
 	$("#myCarousel").on("slid.bs.carousel",function(){
         picsdisplayed++;
         //alert(picsdisplayed);
 	});
 
-});
+
+	function goTo(gameId,difficultY){
+
+		if(gameId===1){
+			gameid=gameId;
+			difficulty=difficultY;
+			game='Capitales.json';
+		} else if(gameId===2){
+			gameid=gameId;
+			difficulty=difficultY;
+			game='Paises.json';
+		}else{
+			gameid=gameId;
+			difficulty=difficultY;
+			game='Monumentos.json';
+		}
+		startGame();
+	}
