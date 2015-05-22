@@ -63,6 +63,7 @@ jQuery(document).ready(function() {
 	});
 
 	function startGame(){
+		picsdisplayed=1;
 		$(".carousel-inner").html('');
 		$("#myCarousel").data("bs.carousel").options.interval = 6000/difficulty;          
 		$('#begin').hide();
@@ -88,11 +89,11 @@ jQuery(document).ready(function() {
 	            var html;
 	            if(i===0){
 	                html='<div class="item active">'
-	                    html+='<img id="carousel0" src="'+data[i].media.m+'"width="100%">'
+	                    html+='<img id="carousel0" src="'+data[i].media.m+'"width="100%" "height="360px">'
 	                html+='</div>'
 	            }else{
 	                html='<div class="item">'
-	                    html+='<img id="carousel'+i+'" src="'+data[i].media.m+'"width="100%">'
+	                    html+='<img id="carousel'+i+'" src="'+data[i].media.m+'"width="100%" "height="360px">'
 	                html+='</div>'
 	            }
 	            $(".carousel-inner").append(html);
