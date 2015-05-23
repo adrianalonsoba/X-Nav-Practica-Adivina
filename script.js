@@ -9,6 +9,10 @@
 
 	var game='';
 
+	var currstate=0;
+
+	var state;
+
 	var gameid;
 
 	var picsdisplayed=1;
@@ -53,7 +57,13 @@
 
 	//OJO CAMBIAR 
 	$('#abort').click(function(){
-		window.location.reload();
+		//window.location.reload();
+
+		$("#myCarousel").data("bs.carousel").options.interval = 0; 
+		//$(".carousel-inner").html('');          
+		$('#gamezone').hide();
+		alert('abort');
+		$('begin').show();
 	});
 
 	$('#start').click(function(){
@@ -137,9 +147,11 @@
 			score:score,
 			difficulty:difficulty
 		}
+		currstate++;
+		var html= '<a href="javascript:goTo('+state+')">'+game+'Puntos: '+score+' Fecha:'+stateObj.date+'</a>'+'<br>';
+		$('#history').append(html);
 		history.pushState(stateObj,'Adivina',location.href+game+difficulty);
-		var html= '<a href="javascript:goTo('+gameid+','+difficulty+')">'+game+'Puntos: '+score+' Fecha:'+stateObj.date+'</a>'+'<br>';
-		$('#history').append(html);	
+	
 	}
 	//actualiza el numero de fotos mostradas
 	$("#myCarousel").on("slid.bs.carousel",function(){
@@ -147,21 +159,18 @@
         //alert(picsdisplayed);
 	});
 
+	function goTo(State){
 
-	function goTo(gameId,difficultY){
-
-		if(gameId===1){
-			gameid=gameId;
-			difficulty=difficultY;
-			game='Capitales.json';
-		} else if(gameId===2){
-			gameid=gameId;
-			difficulty=difficultY;
-			game='Paises.json';
+		state= State - currstate;
+		if(state===0){
+			startGame();
 		}else{
-			gameid=gameId;
-			difficulty=difficultY;
-			game='Monumentos.json';
+			history.go(state);
 		}
-		startGame();
 	}
+
+	window.addEventListener('popstate', function(event) {
+		difficulty=event.state.difficulty;
+		game=event.state.name;
+		startGame();
+	});
