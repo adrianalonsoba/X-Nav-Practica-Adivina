@@ -55,15 +55,13 @@
 		$('#game').html('Monumentos');
 	});
 
-	//OJO CAMBIAR 
 	$('#abort').click(function(){
 		//window.location.reload();
 
 		$("#myCarousel").data("bs.carousel").options.interval = 0; 
 		//$(".carousel-inner").html('');          
 		$('#gamezone').hide();
-		alert('abort');
-		$('begin').show();
+		$('#begin').show();
 	});
 
 	$('#start').click(function(){
