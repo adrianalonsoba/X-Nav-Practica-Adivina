@@ -1,0 +1,13 @@
+{
+  "name": "ADIVINA",
+  "description": "Practica final DAT",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "map-icon.png"
+  },
+  "developer": {
+    "name": "Adrian Alonso Barriuso",
+    "url": "https://github.com/adrianalonsoba"
+  },
+  "default_locale": "en"
+}
